@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Index Page</title>
+		<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+	</head>
+	<body class="w-full h-screen bg-gray-900">
+		<div class="container mx-auto text-white">
+			<p class="p-2 text-3xl">Welcome to my Blog</p>
+			<div class="p-2">
+				<form method="POST">
+					{% csrf_token %}
+
+					<div class="my-2 text-black">
+						<label>Title</label>
+						<input class="w-full rounded p-1" type="text" name="title">
+					</div>
+
+					<div class="my-2 text-black">
+						<label>Content</label>
+						<textarea class="w-full rounded p-1" name="content"></textarea>
+					</div>
+
+					<div class="my-2">
+						<button class="w-auto p-2 bg-blue-800 rounded" type="submit">Save</button>
+					</div>
+				</form>
+			</div>
+
+			<div class="mt-4">
+				<p class="p-2 text-2xl">My Feeds</p>
+				<div class="p-2">
+					{% for article in all_articles %}
+						<div class="rounded p-2 bg-gray-800 my-2">
+							<p class="font-bold">{{ article.title }}</p>
+							<p class="text-2xl">{{ article.content }}</p>
+							<p class="italic">{{ article.date }}</p>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
